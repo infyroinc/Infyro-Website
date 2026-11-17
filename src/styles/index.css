@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────── Tokens — one blue + navy for every company ───────────── */
+:root {
+  --brand: #0a78f2;
+  --brand-hover: #0063d1;
+  --brand-tint: #eaf3fe;
+  --brand-rgb: 10 120 242;
+  --brand-ink: #0063d1; /* AA-safe blue for small text on white */
+  --brand-ink-hover: #0052ad;
+  --nav-h: 64px;
+}
+@media (min-width: 1024px) {
+  :root {
+    --nav-h: 72px;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply bg-white font-sans text-[15px] leading-[1.65] text-ink-2;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance text-ink;
+  }
+  /* Every paragraph is justified (both edges straight). Hyphenation keeps word gaps small
+     (needs <html lang="en">). In centred blocks the last line stays centred. */
+  p,
+  .t-justify {
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    text-wrap: pretty;
+  }
+  p.text-center,
+  .text-center p,
+  .text-center .t-justify {
+    text-align: justify;
+    text-align-last: center;
+  }
+  @media (min-width: 1024px) {
+    .lg\:text-left p,
+    .lg\:text-left .t-justify {
+      text-align-last: auto;
+    }
+  }
+  [id] {
+    scroll-margin-top: calc(var(--nav-h) + 16px);
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: rgb(var(--brand-rgb) / 0.16);
+  }
+}
+
+@layer components {
+  /* Type scale — headings stay prominent, paragraphs stay compact and readable */
+  .t-display {
+    @apply text-[36px] font-bold leading-[1.08] tracking-[-0.03em] sm:text-[44px] lg:text-[54px] xl:text-[60px];
+  }
+  .t-h1 {
+    @apply text-[34px] font-bold leading-[1.1] tracking-[-0.025em] sm:text-[42px] lg:text-[48px] xl:text-[52px];
+  }
+  .t-h2 {
+    @apply text-[28px] font-bold leading-[1.15] tracking-[-0.02em] sm:text-[32px] lg:text-[38px];
+  }
+  .t-h3 {
+    @apply text-[20px] font-semibold leading-[1.3] tracking-[-0.015em] lg:text-[22px];
+  }
+  .t-h4 {
+    @apply text-[17px] font-semibold leading-[1.35] tracking-[-0.01em];
+  }
+  /* Paragraph sizes (alignment: see the justified `p` rule in the base layer) */
+  .t-lead {
+    @apply text-[15px] leading-[1.75] md:text-[16px];
+  }
+  .t-body {
+    @apply text-[15px] leading-[1.75];
+  }
+  .t-small {
+    @apply text-[14px] leading-[1.6];
+  }
+  .t-legal {
+    @apply text-[12px] leading-[1.5];
+  }
+  /* Section eyebrow — clean sans uppercase label */
+  .t-eyebrow {
+    @apply text-[12px] font-semibold uppercase tracking-[0.14em];
+  }
+  .container-content {
+    @apply mx-auto w-full px-4 sm:px-6 md:px-8 lg:max-w-[1120px] lg:px-10 xl:max-w-[1240px];
+  }
+  .container-wide {
+    @apply container-content;
+  }
+
+  /* Short blue rule under section titles */
+  .title-rule {
+    @apply mt-4 block h-[3px] w-12 rounded-full bg-brand;
+  }
+
+  .link-grow {
+    @apply transition-colors duration-200;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

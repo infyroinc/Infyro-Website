@@ -68,8 +68,16 @@ public/          favicon.svg + PNG icons, site.webmanifest, robots.txt, sitemap.
 
 1. Push to GitHub, then import the repo in Vercel (framework preset **Vite**, install `npm install`, build `npm run build`, output `dist`).
 2. Optional: set the variables in `.env.example` (form endpoint, booking Google Form links). Never commit a real `.env` file — `.gitignore` already excludes `.env*` (except `.env.example`), `node_modules` and `dist`.
-3. `vercel.json` rewrites every route to `index.html`, so refreshing any page works. (`netlify.toml` / `public/_redirects` do the same on Netlify.)
+3. `vercel.json` rewrites every route to `index.html`, so refreshing any page works. (`netlify.toml` / `public/_redirects` do the same on Netlify, and `public/.htaccess` on Hostinger / Apache.)
 4. After deploying: submit one test enquiry and activate FormSubmit (see above).
+
+## Deploy on Hostinger (infyroinc.com)
+
+1. `npm run build` — creates `dist/`.
+2. In Hostinger → File Manager → `public_html`: delete the old site files, then upload **everything inside `dist/`**
+   (or upload a zip of it and use *Extract*). Make sure the hidden file **`.htaccess`** is included.
+3. `.htaccess` (from `public/.htaccess`) sends every page address to `index.html`, so opening
+   `/technologies`, `/studios` or `/construction` directly works. Without it those addresses show a 404.
 
 ## Still to supply
 
